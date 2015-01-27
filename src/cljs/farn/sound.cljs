@@ -2,7 +2,7 @@
   (:require [cljs.core.async :refer [put! chan <! >! alts! timeout close!]]
             ))
 
-(def audio-context (if js/window.AudioContext (js/window.AudioContext.) (js/window.webkitAudioContext.)))
+(def audio-context (if js/AudioContext (js/AudioContext.) (js/webkitAudioContext.)))
 
 (def default-gain 0.7)
 
