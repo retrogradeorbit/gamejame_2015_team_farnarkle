@@ -579,7 +579,7 @@
               (when (not= :pickup-baby-1 (:type pickup))
                 (.removeChild main-stage (:sprite pickup))
                 (.removeChild main-stage (:shadow pickup))
-                (log "REMOVING" (str pickup))
+                ;(log "REMOVING" (str pickup))
                 (swap! pickup-store disj pickup))
               )
             )))
