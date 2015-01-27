@@ -28,7 +28,7 @@
   :aliases {
           "dump-index-html" ["run" "-m" "farn.server/dump-html"]
           }
-  
+
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
 
@@ -36,14 +36,36 @@
 
   :uberjar-name "farn.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
-                             :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/out"
-                                        :source-map    "resources/public/js/out.js.map"
-                                        :preamble      ["react/react.min.js"]
-                                        :externs       ["react/externs/react.js"]
-                                        ; :pretty-print  true
-                                        }}}}
+  :cljsbuild
+  {:builds
+   {:app
+    {:source-paths ["src/cljs"]
+     :compiler {:output-to     "resources/public/js/app.js"
+                :output-dir    "resources/public/js/"
+                :source-map    "resources/public/js/app.js.map"
+                :preamble      []
+                :externs       []
+                :pretty-print  true
+                :optimizations :none
+                }}
+    :release {
+              :source-paths ["src/cljs"]
+              :compiler
+              {
+               :output-to "target/release/app.js"
+               ;:output-dir "target/release-output"
+               :optimizations :advanced
+               :pretty-print true
+
+               ;; things we want outside google closure compiler
+               :externs ["src/js/pixi/extern.js"
+                         "src/js/noise.extern.js"
+                         "src/js/random.extern.js"
+                         "src/js/map.extern.js"
+
+                         ;; http://closureplease.com/externs/
+                         "src/js/w3c_audio.js"
+                         ]}}}}
 
   :profiles {:dev {:repl-options {:init-ns farn.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
@@ -71,7 +93,7 @@
                                              :compiler
                                              {:optimizations :advanced
                                               :pretty-print false}}}}}
-             
+
              :build-static {:hooks [leiningen.cljsbuild]
                             :env {:production true}
                             :cljsbuild {:builds {:app
