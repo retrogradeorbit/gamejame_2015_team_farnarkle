@@ -43,13 +43,25 @@ $(MUSIC_OUT_DIR)/%.ogg: $(MUSIC_SRC_DIR)/%.ogg
 
 build-release: sound
 	lein cljsbuild once release
-	cp target/index.html target/release/
-	cp -av target/css target/release/css
-	for DIR in img music sfx js; do cp -av resources/public/$$DIR target/release; done
-	rm -rf target/release/js/out
-	cp src/js/map.js target/release/js/
-	cp src/js/noise.js target/release/js/
-	cp src/js/random.js target/release/js/
+
+	# copy release html and css in
+	cp src/release/index.html target/release/
+	cp -av resources/public/css target/release/css
+
+        # copy in resoures
+	for DIR in img music sfx; do cp -av resources/public/$$DIR target/release; done
+
+	# copy in our release build of pixi
+	-mkdir target/release/js
+	cp src/js/pixi/pixi.js target/release/js/
+
+	# copy in our other js files
+	for JS in random.js noise.js map.js; do cp resources/public/js/$$JS target/release/js/; done
+
+	# copy in our custom javascript
+	#cp src/js/map.js target/release/js/
+	#cp src/js/noise.js target/release/js/
+	#cp src/js/random.js target/release/js/
 
 serve-build:
 	cd target/release/ && python -m SimpleHTTPServer
