@@ -38,7 +38,6 @@
   "img/sprites/static-schroom-3.png"
   "img/sprites/static-giant-schroom-1.png"
   "img/sprites/static-giant-schroom-2.png"
-  "img/sprites/static-giant-shrub-1.png"
   "img/sprites/static-tree-10.png"
   "img/sprites/static-tree-11.png"
   "img/sprites/static-tree-12.png"
@@ -92,7 +91,6 @@
 
 (def =sprites-pink=
   [
-  "img/sprites/pink-crouch-4.png"
   "img/sprites/pink-stand-1.png"
   "img/sprites/pink-stand-2.png"
   "img/sprites/pink-stand-3.png"
