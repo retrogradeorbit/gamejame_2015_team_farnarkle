@@ -53,18 +53,24 @@
               :compiler
               {
                :output-to "target/release/app.js"
-               ;:output-dir "target/release-output"
+
+               ;; these two should be off for release
+               ;; but are useful in pinpointing problems with
+               ;; advanced name munging
+               ;:output-dir "target/release/"
+               ;:source-map "target/release/app.js.map"
+
                :optimizations :advanced
                :pretty-print true
 
                ;; things we want outside google closure compiler
                :externs ["src/js/pixi/extern.js"
-                         "src/js/noise.extern.js"
-                         "src/js/random.extern.js"
-                         "src/js/map.extern.js"
+                         "src/js/externs/noise.js"
+                         "src/js/externs/random.js"
+                         "src/js/externs/map.js"
 
                          ;; http://closureplease.com/externs/
-                         "src/js/w3c_audio.js"
+                         "src/js/externs/w3c_audio.js"
                          ]}}}}
 
   :profiles {:dev {:repl-options {:init-ns farn.server
