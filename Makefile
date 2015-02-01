@@ -58,11 +58,6 @@ build-release: sound
 	# copy in our other js files
 	for JS in random.js noise.js map.js; do cp resources/public/js/$$JS target/release/js/; done
 
-	# copy in our custom javascript
-	#cp src/js/map.js target/release/js/
-	#cp src/js/noise.js target/release/js/
-	#cp src/js/random.js target/release/js/
-
 serve-build:
 	cd target/release/ && python -m SimpleHTTPServer
 

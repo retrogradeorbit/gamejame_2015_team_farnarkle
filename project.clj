@@ -61,7 +61,7 @@
                ;:source-map "target/release/app.js.map"
 
                :optimizations :advanced
-               :pretty-print true
+               :pretty-print false
 
                ;; things we want outside google closure compiler
                :externs ["src/js/pixi/extern.js"
